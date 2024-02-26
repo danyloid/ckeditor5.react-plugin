@@ -6,25 +6,31 @@ import { MultiRootEditorViaHookExample } from "./pages/MultiRootEditorViaHookExa
 import { ClassicEditorExample } from "./pages/ClassicEditorExample";
 import { MultiRootEditorViaManualInitializationExample } from "./pages/MultiRootEditorViaManualInitializationExample";
 import { HomePage } from "./pages/HomePage";
+import { routesConfiguration } from "./routesConfiguration";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: routesConfiguration.index.path,
+      element: <HomePage />,
+    },
+    {
+      path: routesConfiguration.classic.path,
+      element: <ClassicEditorExample />,
+    },
+    {
+      path: routesConfiguration.multiRootViaHook.path,
+      element: <MultiRootEditorViaHookExample />,
+    },
+    {
+      path: routesConfiguration.multiRootViaManualInitialization.path,
+      element: <MultiRootEditorViaManualInitializationExample />,
+    },
+  ],
   {
-    path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "/classic",
-    element: <ClassicEditorExample />,
-  },
-  {
-    path: "/multi-root-via-hook",
-    element: <MultiRootEditorViaHookExample />,
-  },
-  {
-    path: "/multi-root-via-manual-initialization",
-    element: <MultiRootEditorViaManualInitializationExample />,
-  },
-]);
+    basename: routesConfiguration.baseUrl,
+  }
+);
 
 export const App: FC = () => {
   return <RouterProvider router={router} />;
