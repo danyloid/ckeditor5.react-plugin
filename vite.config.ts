@@ -11,4 +11,5 @@ export default defineConfig({
     react(),
     ckeditor5({ theme: require.resolve("@ckeditor/ckeditor5-theme-lark") }),
   ],
+  base: "/ckeditor5-react-plugin/",
 });
