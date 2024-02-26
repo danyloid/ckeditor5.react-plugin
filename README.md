@@ -12,6 +12,12 @@ mapping-model-position-view-parent-not-found {"modelPosition":{"root":"numbered_
 
 This error however is not reproducible when using `<CKEditor>` component from the `@ckeditor/ckeditor5-react` package, or when using manual initialization of the editor.
 
+This repo contains 3 examples:
+
+1. [ClassicEditorExample](./src/pages/ClassicEditorExample.tsx) - using `<CKEditor>` component from the `@ckeditor/ckeditor5-react` package - this example works as expected
+2. [MultiRootEditorViaHookExample](./src/pages/MultiRootEditorViaHookExample.tsx) - using `useMultiRootEditor` hook from the `@ckeditor/ckeditor5-react` package - this example crashes with the error
+3. [MultiRootEditorViaManualInitializationExample](./src/pages/MultiRootEditorViaManualInitializationExample.tsx) - using manual initialization of the editor - this example works as expected
+
 ## Additional context
 
 This project was bootstrapped with [Vite](https://vitejs.dev/guide/), using the `react-ts` template.

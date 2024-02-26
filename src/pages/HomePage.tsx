@@ -1,22 +1,23 @@
 import { FC } from "react";
 
 import "./HomePage.scss";
+import { routesConfiguration } from "../routesConfiguration";
 
 export const HomePage: FC = () => {
   return (
     <div className="home-page">
       <iframe
-        src="/classic"
+        src={routesConfiguration.classic.relativeUrl}
         title="Classic Editor Example"
         className="home-page__example-iframe"
       />
       <iframe
-        src="/multi-root-via-hook"
+        src={routesConfiguration.multiRootViaHook.relativeUrl}
         title="Multi Root Editor Via Hook Example"
         className="home-page__example-iframe"
       />
       <iframe
-        src="/multi-root-via-manual-initialization"
+        src={routesConfiguration.multiRootViaManualInitialization.relativeUrl}
         title="Multi Root Editor Via Manual Initialization Example"
         className="home-page__example-iframe"
       />
