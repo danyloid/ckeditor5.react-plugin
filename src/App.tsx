@@ -1,9 +1,10 @@
 import { FC } from "react";
 
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
 import { MultiRootEditorViaHookExample } from "./pages/MultiRootEditorViaHookExample";
 import { ClassicEditorExample } from "./pages/ClassicEditorExample";
 import { MultiRootEditorViaManualInitializationExample } from "./pages/MultiRootEditorViaManualInitializationExample";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 
 const router = createBrowserRouter([
