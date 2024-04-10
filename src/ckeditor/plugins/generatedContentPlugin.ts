@@ -1,6 +1,10 @@
-import type { Editor } from "@ckeditor/ckeditor5-core";
+import { Editor, Plugin } from "@ckeditor/ckeditor5-core";
 import type { DowncastWriter } from "@ckeditor/ckeditor5-engine";
-import { toWidget } from "@ckeditor/ckeditor5-widget";
+import {
+  Widget,
+  toWidget,
+  viewToModelPositionOutsideModelElement,
+} from "@ckeditor/ckeditor5-widget";
 
 const generatedInlineWidgetName = "generated";
 
@@ -24,6 +28,8 @@ function defineConverters(editor: Editor) {
       class: generatedInlineWidgetName,
     });
 
+    console.log("createGeneratedContentView", generatedContentView);
+
     return generatedContentView;
   }
 
@@ -35,7 +41,9 @@ function defineConverters(editor: Editor) {
     model: (viewElement, { writer: modelWriter }) => {
       const node = viewElement.getChild(0);
       const content = node && "data" in node ? node.data : "";
-      return modelWriter.createElement(generatedInlineWidgetName, { content });
+      return modelWriter.createElement(generatedInlineWidgetName, {
+        name: content,
+      });
     },
   });
 
@@ -61,7 +69,25 @@ export const GeneratedContentPluginConfig = {
   className: "generated",
 };
 
-export function GeneratedContentPlugin(editor: Editor) {
-  defineSchema(editor);
-  defineConverters(editor);
+export class GeneratedContentPlugin extends Plugin {
+  static get requires() {
+    return [Widget];
+  }
+
+  init() {
+    const editor = this.editor;
+    defineSchema(editor);
+    defineConverters(editor);
+
+    this.editor.editing.mapper.on(
+      "viewToModelPosition",
+      viewToModelPositionOutsideModelElement(
+        this.editor.model,
+        (viewElement) => {
+          console.log("viewToModelPosition", viewElement);
+          return viewElement.hasClass(GeneratedContentPluginConfig.className);
+        }
+      )
+    );
+  }
 }
